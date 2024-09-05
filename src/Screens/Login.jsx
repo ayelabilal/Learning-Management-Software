@@ -13,11 +13,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import img from "../assets/wall.png";
-import "../App.css";
+// import "../App.css";
 import { useNavigate } from "react-router-dom";
 
 function Copyright(props) {
-  const navigate = useNavigate()
+ 
   return (
     <Typography
       variant="body2"
@@ -43,29 +43,51 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    navigate('/signup')
     console.log({
       email: data.get("email"),
       password: data.get("password"),
     });
   };
 
+  const navigate = useNavigate();
+  const navigate1 = useNavigate();
+
+  const handleSignup=()=>{
+    navigate('/signup')
+  }
+
+  const handleLogin=()=>{
+    navigate('/dashboard')
+  }
+
+
   return (
-<Grid container spacing={2} sx={{marginLeft:"150px"}}>
+<Grid container spacing={2}>
   <Grid item xs={12} sm={6} md={6} lg={6}>
-    <Box>
+    <Box sx={{width: "800px",
+height: "750px",
+backgroundColor: "white"}}>
+      <Typography sx={{width: "800px",
+paddingLeft: "100px",
+paddingTop: "80px",
+textDecoration: "underline"}}>
+        <h1 >WELCOME TO LEARNING MANAGEMENT SYSTEM</h1>
+      </Typography>
       <img width={700} src={img} alt="" />
     </Box>
   </Grid>
-  <Grid item xs={12} sm={6} md={6} lg={6}>
-    <Box>
+  <Grid item xs={12} sm={6} md={6} lg={6} >
+    <Box sx={{  backgroundColor: "rgb(189, 189, 189)",
+  width: "800px",
+  height: "750px",
+  paddingTop: "100px"}}>
     <ThemeProvider theme={defaultTheme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
           sx={{
             m:"6",
-            marginTop: 8,
+            // marginTop: 8,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
@@ -107,6 +129,7 @@ export default function Login() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleLogin}
             >
               Login
             </Button>
@@ -118,8 +141,9 @@ export default function Login() {
               </Grid>
               <Grid item>
                 <Link href="#" variant="body2">
-                  {"Don't have an account?"} <button onChange={(e)=>navigate("/signup")}>Sign Up</button>
+                  {"Don't have an account?"} 
                 </Link>
+                <Button onClick={handleSignup}>SignUp</Button>
               </Grid>
             </Grid>
           </Box>
@@ -127,7 +151,6 @@ export default function Login() {
         <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
-      {/* <img width={700} src={img} alt="" /> */}
     </Box>
   </Grid>
 </Grid>
